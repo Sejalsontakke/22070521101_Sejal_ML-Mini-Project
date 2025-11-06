@@ -8,13 +8,24 @@ from sklearn.preprocessing import LabelEncoder
 import streamlit as st
 import pandas as pd
 
-uploaded_file = st.file_uploader("Upload the cleaned dataset:", type=["csv"])
+
+
+st.subheader("Upload the cleaned dataset:")
+
+uploaded_file = st.file_uploader("Drag and drop file here", type="csv")
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
-    st.success("Dataset loaded successfully!")
+    st.success("✅ Dataset loaded successfully!")
+    st.write(df.head())
+
+    # 👉 Put all model / analysis / plots code inside this block
+    # Example:
+    st.write("Dataset Shape:", df.shape)
+
 else:
-    st.warning("Please upload the dataset to proceed.")
+    st.warning("⚠️ Please upload the dataset to proceed.")
+
 
 
 # Set plotting style
