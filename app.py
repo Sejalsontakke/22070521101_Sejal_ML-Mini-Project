@@ -119,7 +119,7 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 
 # --- 1. Load Cleaned Data ---
 try:
-    df = pd.read_csv('/content/df_fire_cleaned.csv')
+    df = pd.read_csv('df_fire_cleaned.csv')
 except FileNotFoundError:
     print("ERROR: df_fire_cleaned.csv not found. Please ensure the EDA/Cleaning step was run successfully.")
     raise
