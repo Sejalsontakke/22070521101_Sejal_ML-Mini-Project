@@ -49,9 +49,16 @@ def plot_to_streamlit(fig, use_container_width=True):
     plt.close(fig)
 
 # ------------- APP MAIN -------------
-if uploaded_file is None:
-    st.info("Please upload the **cleaned** dataset to proceed.")
-    st.stop()
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.write(df.head())
+
+    # ✅ Now classification goes here
+    st.header("2) Classification")
+    ...
+else:
+    st.warning("⚠️ Please upload the dataset to proceed.")
+
 
 # Load data
 df = pd.read_csv(uploaded_file, low_memory=False)
