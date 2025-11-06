@@ -133,6 +133,12 @@ plot_to_streamlit(fig)
 st.header("2) Classification: Predict Large Fires (75th percentile)")
 
 # Prepare features
+# Ensure Cause_Simplified exists and is clean
+top_causes = df["Cause"].value_counts().head(5).index.tolist()
+df["Cause_Simplified"] = df["Cause"].apply(lambda x: x if x in top_causes else "Other")
+df["Cause_Simplified"] = df["Cause_Simplified"].astype(str).fillna("Unknown")
+
+# Prepare features
 REGRESSION_TARGET_LOG = "GIS Calculated Acres_log"
 df[REGRESSION_TARGET_LOG] = np.log1p(df["GIS Calculated Acres"])
 
@@ -144,9 +150,15 @@ EXCLUDE_COLS = [
 ]
 
 X = df.drop(columns=EXCLUDE_COLS, errors="ignore")
+
 # Ensure we include Cause_Simplified
 if "Cause_Simplified" not in X.columns:
     X["Cause_Simplified"] = df["Cause_Simplified"]
+
+numeric_features = X.select_dtypes(include=np.number).columns.tolist()
+categorical_features = ["Cause_Simplified"]
+
+
 
 # Separate targets
 y_cls = df["Large_Fire"]
