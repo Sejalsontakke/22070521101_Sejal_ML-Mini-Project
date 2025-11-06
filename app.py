@@ -194,8 +194,17 @@ def evaluate_model(y_true, y_pred, y_proba):
 rows = []
 for name, model in models.items():
     model.fit(X_train, y_train)
-    yp = model.predict(X_test)
-    ypp = model.predict_proba(X_test) if hasattr(model, "predict_proba") else None
-    acc, prec, rec, f1, auc = evaluate_model(y_test, yp, ypp)
+    y_pred = model.predict(X_test)
+    y_proba = model.predict_proba(X_test) if hasattr(model, "predict_proba") else None
+    
+    acc, prec, rec, f1, auc = evaluate_model(y_test, y_pred, y_proba)
+
     rows.append({
-        "Model":
+        "Model": name,
+        "Accuracy": acc,
+        "Precision": prec,
+        "Recall": rec,
+        "F1-Score": f1,
+        "AUC": auc
+    })
+
