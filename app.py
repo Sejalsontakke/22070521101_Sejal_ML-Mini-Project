@@ -5,6 +5,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
+import streamlit as st
+import pandas as pd
+
+uploaded_file = st.file_uploader("Upload the cleaned dataset:", type=["csv"])
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.success("Dataset loaded successfully!")
+else:
+    st.warning("Please upload the dataset to proceed.")
+
 
 # Set plotting style
 sns.set_style("whitegrid")
