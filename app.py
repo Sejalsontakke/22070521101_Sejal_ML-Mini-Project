@@ -11,7 +11,7 @@ sns.set_style("whitegrid")
 
 # --- 1. Load Data, Display Info, and Shape ---
 print("--- 1. Import and Load Data ---")
-file_path = '/content/drive/MyDrive/California_Historic_Dataset/California_Historic_Fire_Perimeters_-6236829869961296710.csv'
+file_path = 'California_Historic_Fire_Perimeters_-6236829869961296710.csv'
 try:
     df = pd.read_csv(file_path, low_memory=False)
 except FileNotFoundError:
