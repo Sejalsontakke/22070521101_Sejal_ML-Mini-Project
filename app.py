@@ -61,7 +61,9 @@ else:
 
 
 # Load data
+uploaded_file.seek(0)  # Reset file pointer
 df = pd.read_csv(uploaded_file, low_memory=False)
+
 
 missing = check_required_columns(df, REQ_COLS)
 if missing:
